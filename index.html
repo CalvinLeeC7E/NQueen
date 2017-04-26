@@ -12,10 +12,15 @@
 <div id="main_view" class="main_view">
   <div class="chessboard" id="chessboard">
     <div class="chessboard_row" v-for="i in queenSize" :class="(i+1)%2==0 ? 'white_start':'black_start'">
-      <div class="chessboard_item div_center" v-for="j in queenSize"><span>{{nowResult[i-1]==j-1 ? 'X' : ''}}</span></div>
+      <div class="chessboard_item div_center" v-for="j in queenSize"><span>{{nowResult[i-1]==j-1 ? 'X' : ''}}</span>
+      </div>
     </div>
   </div>
   <div class="btn" @click="next">next ({{index+1}}/{{count}})</div>
+  <br>
+  <a href="https://github.com/llb421270473/NQueen"><img src="images/github.png" width="60px"></a>
+  <br>
+  <div>&copy;Llb</div>
 </div>
 
 <script>
