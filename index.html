@@ -12,7 +12,7 @@
 <div id="main_view" class="main_view">
   <div class="chessboard" id="chessboard">
     <div class="chessboard_row" v-for="i in queenSize" :class="(i+1)%2==0 ? 'white_start':'black_start'">
-      <div class="chessboard_item" v-for="j in queenSize">{{nowResult[i-1]==j-1 ? 'X' : ''}}</div>
+      <div class="chessboard_item div_center" v-for="j in queenSize"><span>{{nowResult[i-1]==j-1 ? 'X' : ''}}</span></div>
     </div>
   </div>
   <div class="btn" @click="next">next ({{index+1}}/{{count}})</div>
@@ -50,7 +50,13 @@
       }
     }
   })
-  document.getElementById('chessboard').style.height = window.innerWidth + 'px'
+  if (document.documentElement.clientWidth > document.documentElement.clientHeight) {
+    document.getElementById('chessboard').style.width = document.documentElement.clientHeight * 0.7 + 'px'
+    document.getElementById('chessboard').style.height = document.documentElement.clientHeight * 0.7 + 'px'
+  } else {
+    document.getElementById('chessboard').style.height = document.documentElement.clientWidth + 'px'
+  }
+
 </script>
 </body>
 </html>
