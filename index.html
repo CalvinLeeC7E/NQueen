@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>N皇后问题的可视化</title>
+  <script src="https://unpkg.com/vue@2.2.6/dist/vue.js"></script>
+  <script src="es6/NQueen-compiled.js"></script>
+  <link rel="stylesheet" href="NQueen.css">
+</head>
+<body>
+<div id="main_view" class="main_view">
+  <div class="chessboard" id="chessboard">
+    <div class="chessboard_row" v-for="i in queenSize" :class="(i+1)%2==0 ? 'white_start':'black_start'">
+      <div class="chessboard_item" v-for="j in queenSize">{{nowResult[i-1]==j-1 ? 'X' : ''}}</div>
+    </div>
+  </div>
+  <div class="btn" @click="next">next ({{index+1}}/{{count}})</div>
+</div>
+
+<script>
+  new Vue({
+    el: '#main_view',
+    data: {
+      nowResult: [],
+      results: [],
+      index: 0,
+      count: 0,
+      queenSize: 8
+    },
+    mounted: function () {
+      this.init()
+    },
+    methods: {
+      init: function () {
+        let queen = new NQueen(this.queenSize)
+        queen.start()
+        this.results = queen.result
+        this.count = queen.totalCount
+        if (this.results.length > 0) {
+          this.index = 0
+          this.nowResult = this.results[0]
+        }
+      },
+      next: function () {
+        if (this.index < this.count) {
+          this.index += 1
+          this.nowResult = this.results[this.index]
+        }
+      }
+    }
+  })
+  document.getElementById('chessboard').style.height = window.innerWidth + 'px'
+</script>
+</body>
+</html>
