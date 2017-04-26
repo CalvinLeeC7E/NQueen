@@ -33,12 +33,12 @@ var NQueen = function () {
       var queensCount = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 
       if (queensCount == this.queenSize) {
-        //结束后条件，找到的皇后数量等于设定的目标数量
+        //结束条件，找到的皇后数量等于设定的目标数量
         this.result.push([].concat(this.queenPositions));
         this.totalCount += 1;
         return;
       } else {
-        //queensCount代表第几个皇后，每个皇后只能放在一行，那么皇后数即代表行数
+        //queensCount代表第几个皇后，每个皇后只能放在一行，那么皇后数即代表所在行数
         for (var column = 0; column < this.queenSize; column++) {
           this.queenPositions[queensCount] = column;
           if (this.isCanPut(queensCount)) {
